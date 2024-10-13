@@ -48,6 +48,7 @@ This function performs Monte Carlo integration of an arbitrary user-defined func
 
 ### Example:
 ```python
+# 使い方: 例としてガウス関数を定義して積分に使用 (Example usage: Define Gaussian function for integration)
 @cuda.jit(device=True)
 def gaussian_function(x):
     total = 0.0
@@ -55,11 +56,31 @@ def gaussian_function(x):
         total += x[i] ** 2
     return math.exp(-total)
 
+# 次元数と積分範囲の設定 (Define dimensions and bounds for integration)
 dim = 2
 bounds = [(-5, 5)] * dim
-result, samples_list, results_list = monte_carlo_integration(gaussian_function, dim, bounds, total_samples=10**6, batch_size=10**5)
-print(f"Calculated integral: {result}")
+
+# 積分の実行とサンプルデータ取得 (Execute integration and retrieve sample data)
+
 ```
+```python
+# ドーナツ状の関数を定義 (Define a donut-shaped function for integration)
+@cuda.jit(device=True)
+def donut_function(x):
+    total = 0.0
+    for i in range(len(x)):
+        total += x[i] ** 2  # 各次元での距離の2乗を加算 (Sum of squares of distances in each dimension)
+    
+    # 距離が特定範囲にあるときに高く、それ以外は低い値を返す (Return higher values for a specific range of distances)
+    radius = math.sqrt(total)
+    
+    # ドーナツ状の範囲を定義（例えば、半径1から3の範囲） (Define a donut shape with radius 1 to 3)
+    if 1 < radius < 3:
+        return math.exp(-total)  # この範囲ではガウス分布を返す (Return Gaussian distribution in this range)
+    else:
+        return 0.0  # それ以外の範囲では0を返す (Return 0 outside the donut-shaped range)
+```
+
 
 ### Boundary Check and Error Handling:
 - If `dim <= 0`, the function raises a `ValueError` indicating that the dimension must be greater than 0.
@@ -160,6 +181,7 @@ CUDA対応GPUおよび必要なCUDAツールキットがインストールされ
 
 ### 例:
 ```python
+# 使い方: 例としてガウス関数を定義して積分に使用 (Example usage: Define Gaussian function for integration)
 @cuda.jit(device=True)
 def gaussian_function(x):
     total = 0.0
@@ -167,10 +189,29 @@ def gaussian_function(x):
         total += x[i] ** 2
     return math.exp(-total)
 
+# 次元数と積分範囲の設定 (Define dimensions and bounds for integration)
 dim = 2
 bounds = [(-5, 5)] * dim
-result, samples_list, results_list = monte_carlo_integration(gaussian_function, dim, bounds, total_samples=10**6, batch_size=10**5)
-print(f"積分値：{result}")
+
+# 積分の実行とサンプルデータ取得 (Execute integration and retrieve sample data)
+
+```
+```python
+# ドーナツ状の関数を定義 (Define a donut-shaped function for integration)
+@cuda.jit(device=True)
+def donut_function(x):
+    total = 0.0
+    for i in range(len(x)):
+        total += x[i] ** 2  # 各次元での距離の2乗を加算 (Sum of squares of distances in each dimension)
+    
+    # 距離が特定範囲にあるときに高く、それ以外は低い値を返す (Return higher values for a specific range of distances)
+    radius = math.sqrt(total)
+    
+    # ドーナツ状の範囲を定義（例えば、半径1から3の範囲） (Define a donut shape with radius 1 to 3)
+    if 1 < radius < 3:
+        return math.exp(-total)  # この範囲ではガウス分布を返す (Return Gaussian distribution in this range)
+    else:
+        return 0.0  # それ以外の範囲では0を返す (Return 0 outside the donut-shaped range)
 ```
 
 ### 境界チェックとエラーハンドリング:
