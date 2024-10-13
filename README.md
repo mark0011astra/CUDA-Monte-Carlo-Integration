@@ -4,6 +4,8 @@
 
 This repository contains Python code for performing Monte Carlo integration using GPU acceleration via CUDA and Numba. The code is designed for high-dimensional integrals and leverages GPU parallelism to efficiently compute integrals for arbitrary functions. Visualization of the sampling process and results is also included.
 
+![Monte Carlo Visualization](./img2.png)
+
 ## Features
 - **GPU Acceleration**: Utilizes Numba's CUDA JIT compiler to parallelize Monte Carlo integration on a GPU, significantly improving performance compared to CPU-based implementations.
 - **High-Dimensional Integration**: Supports integration in arbitrary dimensions, allowing the user to specify both the number of dimensions and the corresponding bounds for the integral.
