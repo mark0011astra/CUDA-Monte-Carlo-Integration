@@ -104,12 +104,6 @@ The performance of this Monte Carlo integration depends on several factors:
 2. **Dimensionality**: As the number of dimensions increases, the number of samples required to achieve a given level of accuracy grows exponentially. Monte Carlo methods are well-suited for high-dimensional problems, but performance and accuracy may degrade in very high dimensions.
 3. **Batch Size**: Adjusting the batch size can help balance GPU load and memory usage. A larger batch size typically reduces the overhead associated with launching the GPU kernel but requires more GPU memory.
 
-## Future Work
-
-- **Adaptive Sampling**: Implement adaptive sampling strategies to improve accuracy in regions where the integrand has higher variance.
-- **Higher-Dimensional Visualizations**: Extend the visualization to support more than two dimensions, potentially using dimensionality reduction techniques for better interpretability.
-- **Error Estimation**: Add error estimation for the Monte Carlo results to provide users with a confidence interval for the integral.
-
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
@@ -221,12 +215,6 @@ visualize_samples(samples_list, results_list, bounds, sample_fraction=None, max_
 1. **GPUメモリ**: 使用するバッチサイズに対応する十分なメモリがGPUにあることを確認してください。大きなバッチサイズは通常、積分速度を向上させますが、より多くのメモリを必要とします。
 2. **次元数**: 次元が増えると、所定の精度を達成するために必要なサンプル数は指数関数的に増加します。モンテカルロ法は高次元問題に適していますが、非常に高次元の場合、パフォーマンスと精度が低下する可能性があります。
 3. **バッチサイズ**: バッチサイズを調整することで、GPUの負荷とメモリ使用量のバランスを取ることができます。バッチサイズを大きくすると、GPUカーネルの起動にかかるオーバーヘッドが減りますが、より多くのGPUメモリが必要です。
-
-## 将来の拡張
-
-- **適応サンプリング**: 分散が大きい領域で精度を向上させるための適応サンプリング戦略を実装します。
-- **高次元の可視化**: 2次元以上の積分に対応するため、次元削減技術を用いて可視化を拡張します。
-- **誤差推定**: モンテカルロ積分結果に対する誤差推定機能を追加し、積分値の信頼区間を提供します。
 
 ## ライセンス
 
